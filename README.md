@@ -11,7 +11,7 @@
 │   │   └── models.py
 │   │   └── data.py
 │   └── README.md, etc ..
-├── playgrnotebooksound
+├── notebooks
 │   ├── random_stuff.ipynb
 │   ├── figure_making.ipynb
 │   ├── tuning_results.ipynb
