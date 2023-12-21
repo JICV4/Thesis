@@ -4,40 +4,40 @@ import h5torch
 from torch.nn.utils.rnn import pad_sequence
 import numpy as np
 
-class MALDITOFDataset(h5torch.Dataset):
-    def __init__(self, path, subset=None):
-        super().__init__(path, subset=subset, sample_processor=self.sample_processor)
+def sample_processor(f, sample):
+    spectrum = {
+        "intensity": torch.tensor(sample["0/intensity"]).float(),
+        "mz": torch.tensor(sample["0/mz"] if "0/mz" in sample else f["unstructured/mz"][:]),
+        "species" : sample["central"].argmax()
+    }
 
-    @staticmethod
-    def create(path, spectrumobjects, labels, binned=False, **objects):
-        f = h5torch.File(path, "w")
-
-        f.register(labels, "central")
-
-        if binned:
-            intensities = np.stack([s.intensity for s in spectrumobjects])
-            mz = spectrumobjects[0].mz
-            f.register(intensities, axis=0, name="intensity")
-            f.register(mz, axis="unstructured", name="mz")
-        else:
-            intensities = [s.intensity for s in spectrumobjects]
-            mzs = [s.mz for s in spectrumobjects]
-            f.register(intensities, axis=0, name="intensity", mode="vlen")
-            f.register(mzs, axis=0, name="mz", mode="vlen")
-
-        for k, v in objects.items():
-            f.register(v, axis=0, name=k)
-
-    def sample_processor(self, f, sample):
-        spectrum = {
-            "intensity": torch.tensor(sample["0/intensity"]).float(),
-            "mz": torch.tensor(sample["0/mz"] if "0/mz" in sample else f["unstructured/mz"][:]),
-            "species" : sample["central"]
-        }
-
-        sample = {k: v for k, v in sample.items() if k not in ["0/intensity", "0/mz", "central"]}
-        return sample | spectrum
+    sample = {k: v for k, v in sample.items() if k not in ["0/intensity", "0/mz", "central"]}
+    return sample | spectrum
     
+class MaldiZSLCollater():
+    def __init__(self, dataset, return_all_seqs = True):
+        self.seq = dataset.f["1/strain_seq_aligned"].view(np.ndarray)
+        self.name = dataset.f["1/strain_names"].view(np.ndarray)
+
+        self.return_all = return_all_seqs
+
+    def __call__(self, batch):
+        batch_collated = {}
+        batch_collated["intensity"] = torch.tensor(np.array([b["intensity"] for b in batch]))
+        batch_collated["mz"] = torch.tensor(np.array([b["mz"] for b in batch]))
+
+        if self.return_all:
+            batch_collated["species"] = torch.tensor(np.array([b["species"] for b in batch]))
+            batch_collated["seq"] = torch.tensor(self.seq)
+            batch_collated["seq_names"] = list(self.name.astype(str))
+        
+        else:
+            ixes = np.array([b["species"] for b in batch])
+            batch_collated["species"] = torch.arange(len(batch_collated["intensity"]))
+            batch_collated["seq"] = torch.tensor(self.seq[ixes])
+            batch_collated["seq_names"] = list(self.name.astype(str)[ixes])
+        return batch_collated
+
 
 class SpeciesClfDataModule(LightningDataModule):
     def __init__(
@@ -46,6 +46,7 @@ class SpeciesClfDataModule(LightningDataModule):
         batch_size=512,
         n_workers=4,
         in_memory=True,
+        zsl_mode=True, # TODO
     ):
         super().__init__()
         self.path = path
@@ -63,13 +64,14 @@ class SpeciesClfDataModule(LightningDataModule):
             f, subset=("unstructured/split", "train")
         )
 
-        self.val = MALDITOFDataset(
-            f, subset=("unstructured/split", "val")
-        )
+        # TODO
+        #self.val = MALDITOFDataset( # TODO
+        #    f, subset=("unstructured/split", "val")
+        #)
 
-        self.test = MALDITOFDataset(
-            f, subset=("unstructured/split", "test")
-        )
+        #self.test = MALDITOFDataset(
+        #    f, subset=("unstructured/split", "test")
+        #)
 
         self.n_species = len(f["unstructured/species_labels"])
 
