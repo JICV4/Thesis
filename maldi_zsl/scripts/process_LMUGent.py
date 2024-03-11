@@ -12,14 +12,15 @@ import h5torch
 import os
 
 
-SILVA_path = str(sys.argv[0])
-labelsshortdb_path = str(sys.argv[1])
-spectradb_path = str(sys.argv[2])
-lpsn_email = str(sys.argv[3])
-lpsn_pw = str(sys.argv[4])
-h5torch_raw = str(sys.argv[5])
-h5torch_binned = str(sys.argv[6])
-alignment_file = str(sys.argv[7])
+SILVA_path = str(sys.argv[1])
+labelsshortdb_path = str(sys.argv[2])
+spectradb_path = str(sys.argv[3])
+lpsn_email = str(sys.argv[4])
+lpsn_pw = str(sys.argv[5])
+h5torch_raw = str(sys.argv[6])
+h5torch_binned = str(sys.argv[7])
+alignment_file = str(sys.argv[8])
+
 
 ########################################################
 # 1 READ IN ALL SILVA SEQUENCES
@@ -157,6 +158,11 @@ ints = [s.intensity for s in spectra]
 mzs = [s.mz for s in spectra]
 f.register(ints, 0, name="intensity", mode="vlen", dtype_save = "int32", dtype_load="int64")
 f.register(mzs, 0, name="mz", mode="vlen", dtype_save = "float32", dtype_load="float32")
+
+
+ix_to_name = {v: k for k, v in name_to_ix.items()}
+strain_names = [ix_to_name[i] for i in range(len(ix_to_name))]
+strain_seq = [name_to_seq[i] for i in strain_names]
 
 f.register(np.array(strain_names), 1, name="strain_names", mode="N-D", dtype_save="bytes", dtype_load="str")
 f.register(np.array(strain_seq), 1, name="strain_seq", mode="N-D", dtype_save="bytes", dtype_load="str")
