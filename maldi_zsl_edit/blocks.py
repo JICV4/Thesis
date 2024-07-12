@@ -25,14 +25,34 @@ class ResidualBlock(nn.Module):
         # These permutes basically swap BxCxL to BxLxC for the layernorm, and afterwards swap them back
     def forward(self, x):
         return self.net(x) + x #residual connection
-    
+
+#Try
 class GlobalPool(nn.Module):
-    def __init__(self, pooled_axis = 1, mode = "max"):
+    def __init__(self, pooled_axis=1, mode="max"):
         super().__init__()
         assert mode in ["max", "mean"], "Only max and mean-pooling are implemented"
+        self.pooled_axis = pooled_axis
         if mode == "max":
-            self.op = lambda x: torch.max(x, axis = pooled_axis).values
+            self.op = self.max_pool
         elif mode == "mean":
-            self.op = lambda x: torch.mean(x, axis = pooled_axis).values
+            self.op = self.mean_pool
+    #Avoid the implementation of a lambda function to save the full model
+    def max_pool(self, x):
+        return torch.max(x, axis=self.pooled_axis).values
+
+    def mean_pool(self, x):
+        return torch.mean(x, axis=self.pooled_axis)
+
     def forward(self, x):
         return self.op(x)
+
+#class GlobalPool(nn.Module):
+#    def __init__(self, pooled_axis = 1, mode = "max"):
+#        super().__init__()
+#        assert mode in ["max", "mean"], "Only max and mean-pooling are implemented"
+#        if mode == "max":
+#            self.op = lambda x: torch.max(x, axis = pooled_axis).values
+#        elif mode == "mean":
+#            self.op = lambda x: torch.mean(x, axis = pooled_axis).values
+#    def forward(self, x):
+#        return self.op(x)

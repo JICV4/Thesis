@@ -390,10 +390,11 @@ class CNNEmbedding(nn.Module):
     def __init__(self,
         vocab_size = 6, #Number of words, in this case is 5 as (A,T,C,G,-), apparently the standart is (AGCT), 6 as we separate gaps from unknown
         emb_dim = 520,
-        hidden_sizes = [16, 32, 64, 128], #Out chanels of the convolutions, note that the embedding vocab is always five and is defined in the layers and not in the convolution
+        conv_sizes = [32, 64, 128], #Out chanels of the convolutions, note that the embedding vocab is always five and is defined in the layers and not in the convolution
         #Also, the embedding dim shold be here as is the out of the lineal activation function
-        blocks_per_stage = 2, #How many residual blocks are applied before the pooling
-        kernel_size = 5,
+        blocks_per_stage = 0, #How many residual blocks are applied before the pooling
+        kernel_size = 3,
+        hidden_sizes = [512, 256],
         dropout = 0.2,
         nlp = True
     ):
@@ -401,31 +402,47 @@ class CNNEmbedding(nn.Module):
         
         if nlp:
             layers = [ #First do the embedding and correct the dimensions of the output
-                    nn.Embedding(vocab_size, hidden_sizes[0]), #here is the error? The NLP is used to get a dense representation since the beggining
+                    nn.Embedding(vocab_size, conv_sizes[0]), #here is the error? The NLP is used to get a dense representation since the beggining
                     Permute(0,2,1), #The embedding summarize the info of the 
             ]
 
         else:
             layers = [
-                nn.Conv1d(vocab_size, hidden_sizes[0], kernel_size = 3, stride = 1) #Try, set to 
+                nn.Conv1d(vocab_size, conv_sizes[0], kernel_size = 3, stride = 1) #Try, set to 
             ] 
 
-        for i in range(len(hidden_sizes)): #Next the convolutions begins
-            hdim = hidden_sizes[i]
+        for i in range(len(conv_sizes)): #Next the convolutions begins
+            hdim = conv_sizes[i]
             for _ in range(blocks_per_stage): #The convolutions are added to the model as residual blocks, here two consecutive blocks are added
                 layers.append(ResidualBlock(hidden_dim = hdim, kernel_size = kernel_size, dropout = dropout))
             
-            if hdim != hidden_sizes[-1]: #After the residual blocks apply a regular convolution to reduce the dimension
-                layers.append(nn.Conv1d(hdim, hidden_sizes[i+1], kernel_size = 2, stride = 2))
+            if hdim != conv_sizes[-1]: #After the residual blocks apply a regular convolution to reduce the dimension
+                layers.append(nn.Conv1d(hdim, conv_sizes[i+1], kernel_size = 2, stride = 1))
             else: #If ypu are on the last convolution apply a global pooling instead
                 layers.append(GlobalPool(pooled_axis = 2, mode = "max")) #Check if the dim is the right one, should be the lenght (consider shape)
         
-        layers.append(nn.Linear(hidden_sizes[-1], emb_dim)) #End with just an activation layer as it is embedding
+        #Here start the loop of the MLP (In construction)
+        if hidden_sizes == False:
+            layers.append(nn.Linear(conv_sizes[-1], emb_dim)) #End with just an activation layer as it is embedding
         #Note: The first hidden state in layers is the embedding dim of the seq language processing and need to be optimized
         #Note2: The last in layers is the embedding dim for the shared space and score function
+        else:
+            c = conv_sizes[-1]
+            #layers.append(nn.Linear(conv_sizes[-1], hidden_sizes[0]))
+            for i in hidden_sizes:
+                layers.append(nn.Linear(c, i))
+                layers.append(nn.GELU())
+                layers.append(nn.Dropout(dropout))
+                layers.append(nn.LayerNorm(i))
+                #layers.append(
+                #    nn.LayerNorm(i) if layer_or_batchnorm == "layer" else nn.BatchNorm1d(i)
+                #)
+                c = i
+            layers.append(nn.Linear(c, emb_dim)) #End with just an activation layer as it is embedding 
+        
         self.net = nn.Sequential(*layers) 
         self.hsize = emb_dim
-        self.nlp = nlp
+        #self.nlp = nlp #try
 
     def forward(self, batch): #The batch is our perzonalized h5 data set
         # dna should be [B, L], with B=number of samples and L=sequence length, 
@@ -468,7 +485,7 @@ class ZSLClassifier(LightningModule):
         self.embed_dim = emb_dims
         mlp_kwargs['emb_dim'] = emb_dims
         cnn_kwargs['emb_dim'] = emb_dims
-        cnn_kwargs['nlp'] = nlp
+        #cnn_kwargs['nlp'] = nlp #Try
         self.save_hyperparameters()
         self.spectrum_embedder = MLPEmbedding(**mlp_kwargs)
         self.seq_embedder = CNNEmbedding(**cnn_kwargs)
