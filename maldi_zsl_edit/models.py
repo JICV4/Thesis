@@ -552,6 +552,7 @@ class ZSLClassifier(LightningModule):
         loss = F.cross_entropy(logits, batch["strain"])
 
         self.log("train_loss", loss, batch_size=len(batch["strain"])) 
+        print(f"The training loss is: {loss}")
         return loss
 
     def validation_step(self, batch, batch_idx):
@@ -572,8 +573,11 @@ class ZSLClassifier(LightningModule):
             on_epoch=True,
             batch_size=len(batch["strain"]),
         )
+        print(f"The val loss is: {loss}")
 
         self.accuracy(logits, batch["strain"])
+        print(f"The val acc is: {self.accuracy}")
+        
         self.log(
             "val_acc",
             self.accuracy,
@@ -582,6 +586,8 @@ class ZSLClassifier(LightningModule):
             batch_size=len(batch["strain"]),
         )
         self.top5_accuracy(logits, batch["strain"])
+        print(f"The top 5 val acc is: {self.top5_accuracy}")
+
         self.log(
             "val_top5_acc",
             self.top5_accuracy,
