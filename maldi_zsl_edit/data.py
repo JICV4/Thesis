@@ -22,13 +22,14 @@ class MALDITOF_ZSL_Dataset(h5torch.Dataset):
 
         self.frac = frac #Added fot ZSL seq
         if self.frac == "train": #Added for ZSL seq, consider one for the val
-            #print("\n create index train\n") 
+        #   print("\n create index train\n") 
             self.indices_in_train = np.unique(self.f["central"][:][self.f[self.split][:].astype(str) == "train"].argmax(1))
             self.train_index_mapper = {v : k for k, v in enumerate(self.indices_in_train)}
-        #if self.frac == "val": #Added (myself) for ZSL seq
-        #    print("\n create index val\n") 
-        #    self.indices_in_val = np.unique(self.f["central"][:][self.f[self.split][:].astype(str) == "val"].argmax(1))
-        #    self.val_index_mapper = {v : k for k, v in enumerate(self.indices_in_val)}
+        if self.frac == "val": #Added (myself) for ZSL seq
+        #   print("\n create index val\n") 
+            self.indices_in_val = np.unique(self.f["central"][:][np.char.startswith(self.f[self.split][:].astype(str), 'val')].argmax(1))
+            #self.indices_in_val = np.unique(self.f["central"][:][self.f[self.split][:].astype(str) == "val"].argmax(1))
+            self.val_index_mapper = {v : k for k, v in enumerate(self.indices_in_val)}
 
     def sample_processor(self, f, sample):
         return {
@@ -51,12 +52,13 @@ class MALDITOF_ZSL_Dataset(h5torch.Dataset):
                 batch_collated["seq_names"] = list(self.name.astype(str)[self.indices_in_train])
                 batch_collated["seq_ohe"] = torch.tensor(self.ohe[self.indices_in_train]).to(torch.float) #added
 
-            #elif self.frac == "val": #Added (myself) fot ZSL seq
+            elif self.frac == "val": #Added (myself) fot ZSL seq
             #    print("\n create values val\n") 
-            #    batch_collated["strain"] = torch.tensor(np.array([self.val_index_mapper[b["strain"]] for b in batch]))
-            #    batch_collated["seq"] = torch.tensor(self.seq[self.indices_in_val]).to(torch.int)
-            #    batch_collated["seq_names"] = list(self.name.astype(str)[self.indices_in_val])
-            
+                batch_collated["strain"] = torch.tensor(np.array([self.val_index_mapper[b["strain"]] for b in batch]))
+                batch_collated["seq"] = torch.tensor(self.seq[self.indices_in_val]).to(torch.int)
+                batch_collated["seq_names"] = list(self.name.astype(str)[self.indices_in_val])
+                batch_collated["seq_ohe"] = torch.tensor(self.ohe[self.indices_in_val]).to(torch.float) #added
+
             else:
                 batch_collated["strain"] = torch.tensor(np.array([b["strain"] for b in batch]))
                 batch_collated["seq"] = torch.tensor(self.seq).to(torch.int) #here all the seq are passed, if we dont specify a condition for val then all the seq will be on val
