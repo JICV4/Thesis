@@ -422,7 +422,7 @@ class CNNEmbedding(nn.Module):
                 layers.append(GlobalPool(pooled_axis = 2, mode = "max")) #Check if the dim is the right one, should be the lenght (consider shape)
         
         #Here start the loop of the MLP (In construction)
-        if hidden_sizes == False:
+        if hidden_sizes == [0]: #Add the [0] as parameter instead of False
             layers.append(nn.Linear(conv_sizes[-1], emb_dim)) #End with just an activation layer as it is embedding
         #Note: The first hidden state in layers is the embedding dim of the seq language processing and need to be optimized
         #Note2: The last in layers is the embedding dim for the shared space and score function
@@ -475,6 +475,7 @@ class ZSLClassifier(LightningModule):
         mlp_kwargs={},
         cnn_kwargs={},
         n_classes = 400,
+        t_classes = 400,
         lr=1e-4,
         weight_decay=0,
         lr_decay_factor=1.00,
@@ -491,9 +492,15 @@ class ZSLClassifier(LightningModule):
         self.seq_embedder = CNNEmbedding(**cnn_kwargs)
         #n_classes = mlp_kwargs["n_outputs"] #number of candidate seq considered
         self.accuracy = MulticlassAccuracy(num_classes=n_classes, average="micro")
+        self.accuracy2 = MulticlassAccuracy(num_classes=t_classes, average="micro") #added
         self.top5_accuracy = MulticlassAccuracy( #Likely to be out
             num_classes=n_classes, top_k=5, average="micro"
         )
+        # 1: To print the accu
+        self.train_loss = [] # Added, save outputs in each batch to compute metric overall epoch
+        self.train_accu = [] # Added, save targets in each batch to compute metric overall epoch
+        self.val_loss = [] # Added, save outputs in each batch to compute metric overall epoch
+        self.val_accu = [] # Added, save targets in each batch to compute metric overall epoch
     
     def get_char(self,batch):
         print(batch,type(batch),batch.shape)
@@ -548,21 +555,46 @@ class ZSLClassifier(LightningModule):
         #print("logits info of batch and an instance")
         #self.get_char(logits)
 
-        
         loss = F.cross_entropy(logits, batch["strain"])
 
         self.log("train_loss", loss, batch_size=len(batch["strain"])) 
-        print(f"The training loss is: {loss}")
+        #print(f"The training loss is: {loss}")
+
+        accu = self.accuracy2(logits, batch["strain"]) #Added
+        #print(f"The val acc is: {self.accuracy}")
+        #self.log(
+        #    "train_acc",
+        #    self.accuracy2,
+        #    on_step=False,
+        #    on_epoch=True,
+        #    batch_size=len(batch["strain"]),
+        #)
+
+        #To print the accu and loss
+        self.train_loss.append(loss) #self.train_loss.extend(loss) #Added
+        self.train_accu.append(accu) #self.train_accu.extend(self.accuracy2) #Added 
+
         return loss
+
+    #def on_training_epoch_end(self): #Added
+    #    # Aggregate results and print accuracy and loss
+    #    print(print("\n HEREEEEE 1\n"))
+    #    epoch_train_loss = sum(self.train_loss)/len(self.train_loss)  #self.train_loss.mean()
+    #    epoch_train_accu = sum(self.train_accu)/len(self.train_accu)  #self.train_accu.mean()
+    #    print(f"\nEpoch {self.current_epoch} - Train loss: {epoch_train_loss}, Train accu: {epoch_train_accu}")
+    #    self.train_loss = [] #self.train_loss.clear()
+    #    self.train_accu = [] #self.train_accu.clear()        
+
+        #train_loss = torch.stack([x['loss'] for x in self.trainer.train_dataloader]).mean()
+        #train_acc = torch.stack([x['acc'] for x in self.trainer.train_dataloader]).mean()
+        #print(f"Epoch {self.current_epoch} - Train loss: {train_loss:.4f}, Train acc: {train_acc:.4f}")
 
     def validation_step(self, batch, batch_idx):
         #print("In validation")
-
         batch["intensity"] = batch["intensity"].to(self.dtype)
         batch["mz"] = batch["mz"].to(self.dtype)
 
         logits = self(batch)
-
         #print(logits.shape, batch["strain"].shape)
         loss = F.cross_entropy(logits, batch["strain"]) #originally species, change to strain
 
@@ -573,11 +605,10 @@ class ZSLClassifier(LightningModule):
             on_epoch=True,
             batch_size=len(batch["strain"]),
         )
-        print(f"The val loss is: {loss}")
+        #print(f"The val loss is: {loss}")
 
-        self.accuracy(logits, batch["strain"])
-        print(f"The val acc is: {self.accuracy}")
-        
+        accu = self.accuracy(logits, batch["strain"])
+        #print(f"The val acc is: {self.accuracy}")
         self.log(
             "val_acc",
             self.accuracy,
@@ -586,8 +617,7 @@ class ZSLClassifier(LightningModule):
             batch_size=len(batch["strain"]),
         )
         self.top5_accuracy(logits, batch["strain"])
-        print(f"The top 5 val acc is: {self.top5_accuracy}")
-
+        #print(f"The top 5 val acc is: {self.top5_accuracy}")
         self.log(
             "val_top5_acc",
             self.top5_accuracy,
@@ -595,6 +625,49 @@ class ZSLClassifier(LightningModule):
             on_epoch=True,
             batch_size=len(batch["strain"]),
         )
+
+        #To print the accu and loss
+        self.val_loss.append(loss) #.extend(loss) #Added
+        self.val_accu.append(accu) #.extend(self.accuracy) #Added 
+
+    def on_validation_epoch_end(self):
+        # Aggregate results and print accuracy and loss
+        if len(self.train_loss) == 0:
+            epoch_train_loss = "NA"
+            epoch_train_accu = 0.0  #self.train_accu.mean()            
+        else:
+            epoch_train_loss = sum(self.train_loss)/len(self.train_loss)  #self.train_loss.mean()
+            epoch_train_accu = sum(self.train_accu)/len(self.train_accu)  #self.train_accu.mean()
+        print(f"\nEpoch {self.current_epoch} - Train loss: {epoch_train_loss}, Train accu: {epoch_train_accu}")
+        self.train_loss = [] #self.train_loss.clear()
+        self.train_accu = [] #self.train_accu.clear()  
+        
+        # Aggregate results and print accuracy and loss
+        epoch_val_loss = sum(self.val_loss)/len(self.val_loss) #self.val_loss.mean()
+        epoch_val_accu = sum(self.val_accu)/len(self.val_accu) #self.val_accu.mean()
+        print(f"\nEpoch {self.current_epoch} - Val loss: {epoch_val_loss}, Val accu: {epoch_val_accu}")
+        self.val_loss = [] #.clear()
+        self.val_accu = [] #.clear()  
+
+        #val_loss = torch.stack([x['val_loss'] for x in self.trainer.val_dataloader]).mean()
+        #val_acc = torch.stack([x['val_acc'] for x in self.trainer.val_dataloader]).mean()
+        #print(f"Epoch {self.current_epoch} - Val loss: {val_loss:.4f}, Val acc: {val_acc:.4f}")
+
+    #def on_training_epoch_end(self, logits): #Added
+    #    train_accuracy = self.train_accuracy.compute()
+    #    train_loss = torch.stack([x['loss'] for x in logits]).mean()
+    #    self.log('train_accuracy', train_accuracy, prog_bar=True)
+    #    self.log('train_loss', train_loss, prog_bar=True)
+    #    print(f"Epoch {self.current_epoch}: Train Loss: {train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}")
+    #    self.train_accuracy.reset()
+
+    #def on_validation_epoch_end(self, logits): #Added
+    #    val_accuracy = self.val_accuracy.compute()
+    #    val_loss = torch.stack([x['val_loss'] for x in logits]).mean()
+    #    self.log('val_accuracy', val_accuracy, prog_bar=True)
+    #    self.log('val_loss', val_loss, prog_bar=True)
+    #    print(f"Epoch {self.current_epoch}: Val Loss: {val_loss:.4f}, Val Accuracy: {val_accuracy:.4f}")
+    #    self.val_accuracy.reset()
 
     def predict_step(self, batch, batch_idx): #Here the data set will return a vector with the scores of all the analized seq in the seq minibatc
         batch["intensity"] = batch["intensity"].to(self.dtype)
@@ -636,4 +709,4 @@ class ZSLClassifier(LightningModule):
         total_params = sum(p.numel() for p in self.parameters())
         params_per_layer += [("total", total_params)]
         return params_per_layer
-
+    
