@@ -645,7 +645,7 @@ class ZSLClassifier(LightningModule):
         # Aggregate results and print accuracy and loss
         epoch_val_loss = sum(self.val_loss)/len(self.val_loss) #self.val_loss.mean()
         epoch_val_accu = sum(self.val_accu)/len(self.val_accu) #self.val_accu.mean()
-        print(f"\nEpoch {self.current_epoch} - Val loss: {epoch_val_loss}, Val accu: {epoch_val_accu}")
+        print(f"Epoch {self.current_epoch} - Val loss: {epoch_val_loss}, Val accu: {epoch_val_accu}\n")
         self.val_loss = [] #.clear()
         self.val_accu = [] #.clear()  
 

@@ -48,26 +48,26 @@ class MALDITOF_ZSL_Dataset(h5torch.Dataset):
             if self.frac == "train": #Added fot ZSL seq
                 #print("\n create values train\n") 
                 batch_collated["strain"] = torch.tensor(np.array([self.train_index_mapper[b["strain"]] for b in batch]))
-                batch_collated["seq"] = torch.tensor(self.seq[self.indices_in_train]).to(torch.int) #Maybe here is where we need to do the data type
+                #batch_collated["seq"] = torch.tensor(self.seq[self.indices_in_train]).to(torch.int) #Maybe here is where we need to do the data type
                 batch_collated["seq_names"] = list(self.name.astype(str)[self.indices_in_train])
                 batch_collated["seq_ohe"] = torch.tensor(self.ohe[self.indices_in_train]).to(torch.float) #added
 
             elif self.frac == "val": #Added (myself) fot ZSL seq
             #    print("\n create values val\n") 
                 batch_collated["strain"] = torch.tensor(np.array([self.val_index_mapper[b["strain"]] for b in batch]))
-                batch_collated["seq"] = torch.tensor(self.seq[self.indices_in_val]).to(torch.int)
+                #batch_collated["seq"] = torch.tensor(self.seq[self.indices_in_val]).to(torch.int)
                 batch_collated["seq_names"] = list(self.name.astype(str)[self.indices_in_val])
                 batch_collated["seq_ohe"] = torch.tensor(self.ohe[self.indices_in_val]).to(torch.float) #added
 
             else:
                 batch_collated["strain"] = torch.tensor(np.array([b["strain"] for b in batch]))
-                batch_collated["seq"] = torch.tensor(self.seq).to(torch.int) #here all the seq are passed, if we dont specify a condition for val then all the seq will be on val
+                #batch_collated["seq"] = torch.tensor(self.seq).to(torch.int) #here all the seq are passed, if we dont specify a condition for val then all the seq will be on val
                 batch_collated["seq_names"] = list(self.name.astype(str))
                 batch_collated["seq_ohe"] = torch.tensor(self.ohe).to(torch.float) #added
         else:
             ixes = np.array([b["strain"] for b in batch])
             batch_collated["strain"] = torch.arange(len(batch_collated["intensity"]))
-            batch_collated["seq"] = torch.tensor(self.seq[ixes]).to(torch.int) #Add the .to(torch.int) to try to correct an error
+            #batch_collated["seq"] = torch.tensor(self.seq[ixes]).to(torch.int) #Add the .to(torch.int) to try to correct an error
             batch_collated["seq_names"] = list(self.name.astype(str)[ixes])
             batch_collated["seq_ohe"] = torch.tensor(self.ohe[ixes]).to(torch.float) #added
         return batch_collated
