@@ -379,7 +379,7 @@ class MLPEmbedding(nn.Module):
         layers.append(nn.Linear(c, emb_dim)) #Last layer is omited or used for the embdding
 
         self.net = nn.Sequential(*layers)
-        self.hsize = emb_dim
+        #self.hsize = emb_dim #Commented
 
     def forward(self, spectrum):
         #print(self.net) #Maybe the last layer is still needed, but with the dim of the embedding
@@ -394,22 +394,12 @@ class CNNEmbedding(nn.Module):
         #Also, the embedding dim shold be here as is the out of the lineal activation function
         blocks_per_stage = 0, #How many residual blocks are applied before the pooling
         kernel_size = 3,
-        hidden_sizes = [512, 256],
+        hidden_sizes = [512, 256], #For an extra mlp at the end
         dropout = 0.2,
-        nlp = True
     ):
         super().__init__()
-        
-        if nlp:
-            layers = [ #First do the embedding and correct the dimensions of the output
-                    nn.Embedding(vocab_size, conv_sizes[0]), #here is the error? The NLP is used to get a dense representation since the beggining
-                    Permute(0,2,1), #The embedding summarize the info of the 
-            ]
 
-        else:
-            layers = [
-                nn.Conv1d(vocab_size, conv_sizes[0], kernel_size = 3, stride = 1) #Try, set to 
-            ] 
+        layers = [nn.Conv1d(vocab_size, conv_sizes[0], kernel_size = 3, stride = 1)] 
 
         for i in range(len(conv_sizes)): #Next the convolutions begins
             hdim = conv_sizes[i]
@@ -421,7 +411,7 @@ class CNNEmbedding(nn.Module):
             else: #If ypu are on the last convolution apply a global pooling instead
                 layers.append(GlobalPool(pooled_axis = 2, mode = "max")) #Check if the dim is the right one, should be the lenght (consider shape)
         
-        #Here start the loop of the MLP (In construction)
+        #Here start the loop of the MLP 
         if hidden_sizes == [0]: #Add the [0] as parameter instead of False
             layers.append(nn.Linear(conv_sizes[-1], emb_dim)) #End with just an activation layer as it is embedding
         #Note: The first hidden state in layers is the embedding dim of the seq language processing and need to be optimized
@@ -450,18 +440,7 @@ class CNNEmbedding(nn.Module):
         
         inputs = batch['seq_ohe']
         #inputs = torch.LongTensor(batch['seq']) # maybe requires to transform it before using the data loader? 
-        
-        #if not self.nlp: #Need to do the ohe and correct the dim of the data
-        #    dim2 = []
-        #    for inst in inputs:
-        #        dim1 = []
-        #        for pos in inst:
-        #            dim0=[0,0,0,0,0,0]
-        #            dim0[pos] = 1
-        #            dim1.append(dim0)
-        #        dim2.append(dim1)
-        #    inputs = torch.transpose(torch.tensor(dim2, dtype=torch.float),1,2).to("cuda:0") #Create the tensor and correct the dimensions
-   
+
         #print("'a' batch inputs",inputs,type(inputs),inputs.shape)
         #print("'a' instance inputs",inputs[0],type(inputs[0]),inputs[0].shape)
         #print(self.net)
@@ -471,7 +450,7 @@ class CNNEmbedding(nn.Module):
 class ZSLClassifier(LightningModule):
     def __init__(
         self,
-        emb_dims = 520,
+        embed_dim = 520,
         mlp_kwargs={},
         cnn_kwargs={},
         n_classes = 400,
@@ -483,9 +462,9 @@ class ZSLClassifier(LightningModule):
         nlp = True
     ):
         super().__init__()
-        self.embed_dim = emb_dims
-        mlp_kwargs['emb_dim'] = emb_dims
-        cnn_kwargs['emb_dim'] = emb_dims
+        self.embed_dim = embed_dim
+        mlp_kwargs['emb_dim'] = self.embed_dim
+        cnn_kwargs['emb_dim'] = self.embed_dim
         #cnn_kwargs['nlp'] = nlp #Try
         self.save_hyperparameters()
         self.spectrum_embedder = MLPEmbedding(**mlp_kwargs)
