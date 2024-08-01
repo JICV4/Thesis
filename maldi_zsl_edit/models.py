@@ -358,7 +358,6 @@ class MLPEmbedding(nn.Module):
         self,
         n_inputs=6000,
         emb_dim = 520,
-        #n_outputs=400,
         layer_dims=[512, 256], #The last layer is the number of embedding dim of the shared space and score function
         layer_or_batchnorm="layer",
         dropout=0.2,
@@ -379,10 +378,8 @@ class MLPEmbedding(nn.Module):
         layers.append(nn.Linear(c, emb_dim)) #Last layer is omited or used for the embdding
 
         self.net = nn.Sequential(*layers)
-        #self.hsize = emb_dim #Commented
 
     def forward(self, spectrum):
-        #print(self.net) #Maybe the last layer is still needed, but with the dim of the embedding
         return self.net(spectrum["intensity"]) #Run the data to the network, as we work with our special format file then we can use the whole h5 file and specify what value is the one we are going to use 
 
 
@@ -414,8 +411,7 @@ class CNNEmbedding(nn.Module):
         #Here start the loop of the MLP 
         if hidden_sizes == [0]: #Add the [0] as parameter instead of False
             layers.append(nn.Linear(conv_sizes[-1], emb_dim)) #End with just an activation layer as it is embedding
-        #Note: The first hidden state in layers is the embedding dim of the seq language processing and need to be optimized
-        #Note2: The last in layers is the embedding dim for the shared space and score function
+
         else:
             c = conv_sizes[-1]
             #layers.append(nn.Linear(conv_sizes[-1], hidden_sizes[0]))
@@ -424,9 +420,6 @@ class CNNEmbedding(nn.Module):
                 layers.append(nn.GELU())
                 layers.append(nn.Dropout(dropout))
                 layers.append(nn.LayerNorm(i))
-                #layers.append(
-                #    nn.LayerNorm(i) if layer_or_batchnorm == "layer" else nn.BatchNorm1d(i)
-                #)
                 c = i
             layers.append(nn.Linear(c, emb_dim)) #End with just an activation layer as it is embedding 
         
@@ -435,17 +428,8 @@ class CNNEmbedding(nn.Module):
         #self.nlp = nlp #try
 
     def forward(self, batch): #The batch is our perzonalized h5 data set
-        # dna should be [B, L], with B=number of samples and L=sequence length, 
-        # and should be filled with integers from 0 to 4, encoding the DNA sequence.
-        
         inputs = batch['seq_ohe']
-        #inputs = torch.LongTensor(batch['seq']) # maybe requires to transform it before using the data loader? 
-
-        #print("'a' batch inputs",inputs,type(inputs),inputs.shape)
-        #print("'a' instance inputs",inputs[0],type(inputs[0]),inputs[0].shape)
-        #print(self.net)
-        return self.net(inputs) # output will be [B, n_outputs] (m,e,1) 
-        #Here is an error
+        return self.net(inputs) 
 
 class ZSLClassifier(LightningModule):
     def __init__(
@@ -469,9 +453,8 @@ class ZSLClassifier(LightningModule):
         self.save_hyperparameters()
         self.spectrum_embedder = MLPEmbedding(**mlp_kwargs)
         self.seq_embedder = CNNEmbedding(**cnn_kwargs)
-        #n_classes = mlp_kwargs["n_outputs"] #number of candidate seq considered
         self.accuracy = MulticlassAccuracy(num_classes=n_classes, average="micro")
-        self.accuracy2 = MulticlassAccuracy(num_classes=t_classes, average="micro") #added
+        self.accuracy2 = MulticlassAccuracy(num_classes=t_classes, average="micro") #added, is the one of the training
         self.top5_accuracy = MulticlassAccuracy( #Likely to be out
             num_classes=n_classes, top_k=5, average="micro"
         )
@@ -486,95 +469,33 @@ class ZSLClassifier(LightningModule):
         print(batch[0],type(batch[0]),batch[0].shape)
 
     def forward(self, batch): #Edit
-        #Note the forward define the inference step so maybe it doesnt use directly the dm.training?
-        #print("\n \nDuring forward")
-        #print("intensity info of batch and an instance")
-        #self.get_char(batch['intensity'])
-        #print("mz info of batch and an instance")
-        #self.get_char(batch['mz'])
-        #print("seq info of batch and an instance")
-        #self.get_char(batch['seq_ohe'])
-
-        #print("\n \n -- During braches pass --")
-        #print("Start x")
         x = self.spectrum_embedder(batch) #Where 'x' is the input
-        #x is running
-        #print("x out",x,type(x),x.shape) #Add prints to the variables, expected (batch_size,e), where batch_size is the mini batch size, e is embeddings dimensions
-        #print("start a")
         a = self.seq_embedder(batch).reshape(-1, self.embed_dim) #And 'a' is the attribute or side information that work as identifier of the class
-        #a is running
-        
-        #A last reshape so (m,e,1) goes to (-1,e)
-        #print("a out",a,type(a),a.shape) #Add prints to the variables, expected (m,e,1), where m is batch of sequences to be analyzed, e is embeddings dimensions, 1 due to global pool
-        #a is not running
-        
         #Get the similarity scores
         scores = torch.matmul(x, a.t()) #Check dim maybe need to transpose
-        #print("\nscore info\n",scores,type(scores),scores.shape)
         return scores #maybe need to softmax
-        #Optimal: dim(x)=[1,e] and dim(a)=[e,m] ; where e is the embeding dimension and m is the number of sequences compared
-        #Maybe m needs to be 1 so the score function will be only 1 dimension? This requiere to train the maldi data with all the seq separatelly
-        #Or maybe just doesnt matter and the seq will be processed separatelly
 
     def training_step(self, batch, batch_idx): #Editing
-        #print("In traininig")
-
         batch["intensity"] = batch["intensity"].to(self.dtype)
         batch["mz"] = batch["mz"].to(self.dtype)
         batch['seq_ohe'].to(self.dtype) #Maybe?
 
-        #print("intensity info of batch and an instance")
-        #self.get_char(batch['intensity'])
-        #print("mz info of batch and an instance")
-        #self.get_char(batch['mz'])
-        #print("seq info of batch and an instance")
-        #self.get_char(batch['seq_ohe'])
-        
         logits = self(batch) #The model is based on the MLP/CNNNemebdding, that specify on the foward that 'intensity' and 'seq' are the inputs so you can use the whole batch as input
-        #print("logits info of batch and an instance")
-        #self.get_char(logits)
-
         loss = F.cross_entropy(logits, batch["strain"])
-
         self.log("train_loss", loss, batch_size=len(batch["strain"])) 
-        #print(f"The training loss is: {loss}")
-
         accu = self.accuracy2(logits, batch["strain"]) #Added
-        #print(f"The val acc is: {self.accuracy}")
-        #self.log(
-        #    "train_acc",
-        #    self.accuracy2,
-        #    on_step=False,
-        #    on_epoch=True,
-        #    batch_size=len(batch["strain"]),
-        #)
+        #Consider a log for the accu
 
-        #To print the accu and loss
         self.train_loss.append(loss) #self.train_loss.extend(loss) #Added
         self.train_accu.append(accu) #self.train_accu.extend(self.accuracy2) #Added 
 
         return loss
 
-    #def on_training_epoch_end(self): #Added
-    #    # Aggregate results and print accuracy and loss
-    #    print(print("\n HEREEEEE 1\n"))
-    #    epoch_train_loss = sum(self.train_loss)/len(self.train_loss)  #self.train_loss.mean()
-    #    epoch_train_accu = sum(self.train_accu)/len(self.train_accu)  #self.train_accu.mean()
-    #    print(f"\nEpoch {self.current_epoch} - Train loss: {epoch_train_loss}, Train accu: {epoch_train_accu}")
-    #    self.train_loss = [] #self.train_loss.clear()
-    #    self.train_accu = [] #self.train_accu.clear()        
-
-        #train_loss = torch.stack([x['loss'] for x in self.trainer.train_dataloader]).mean()
-        #train_acc = torch.stack([x['acc'] for x in self.trainer.train_dataloader]).mean()
-        #print(f"Epoch {self.current_epoch} - Train loss: {train_loss:.4f}, Train acc: {train_acc:.4f}")
-
     def validation_step(self, batch, batch_idx):
-        #print("In validation")
         batch["intensity"] = batch["intensity"].to(self.dtype)
         batch["mz"] = batch["mz"].to(self.dtype)
 
         logits = self(batch)
-        #print(logits.shape, batch["strain"].shape)
         loss = F.cross_entropy(logits, batch["strain"]) #originally species, change to strain
 
         self.log(
@@ -584,10 +505,8 @@ class ZSLClassifier(LightningModule):
             on_epoch=True,
             batch_size=len(batch["strain"]),
         )
-        #print(f"The val loss is: {loss}")
 
         accu = self.accuracy(logits, batch["strain"])
-        #print(f"The val acc is: {self.accuracy}")
         self.log(
             "val_acc",
             self.accuracy,
@@ -596,7 +515,6 @@ class ZSLClassifier(LightningModule):
             batch_size=len(batch["strain"]),
         )
         self.top5_accuracy(logits, batch["strain"])
-        #print(f"The top 5 val acc is: {self.top5_accuracy}")
         self.log(
             "val_top5_acc",
             self.top5_accuracy,
@@ -628,25 +546,6 @@ class ZSLClassifier(LightningModule):
         self.val_loss = [] #.clear()
         self.val_accu = [] #.clear()  
 
-        #val_loss = torch.stack([x['val_loss'] for x in self.trainer.val_dataloader]).mean()
-        #val_acc = torch.stack([x['val_acc'] for x in self.trainer.val_dataloader]).mean()
-        #print(f"Epoch {self.current_epoch} - Val loss: {val_loss:.4f}, Val acc: {val_acc:.4f}")
-
-    #def on_training_epoch_end(self, logits): #Added
-    #    train_accuracy = self.train_accuracy.compute()
-    #    train_loss = torch.stack([x['loss'] for x in logits]).mean()
-    #    self.log('train_accuracy', train_accuracy, prog_bar=True)
-    #    self.log('train_loss', train_loss, prog_bar=True)
-    #    print(f"Epoch {self.current_epoch}: Train Loss: {train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}")
-    #    self.train_accuracy.reset()
-
-    #def on_validation_epoch_end(self, logits): #Added
-    #    val_accuracy = self.val_accuracy.compute()
-    #    val_loss = torch.stack([x['val_loss'] for x in logits]).mean()
-    #    self.log('val_accuracy', val_accuracy, prog_bar=True)
-    #    self.log('val_loss', val_loss, prog_bar=True)
-    #    print(f"Epoch {self.current_epoch}: Val Loss: {val_loss:.4f}, Val Accuracy: {val_accuracy:.4f}")
-    #    self.val_accuracy.reset()
 
     def predict_step(self, batch, batch_idx): #Here the data set will return a vector with the scores of all the analized seq in the seq minibatc
         batch["intensity"] = batch["intensity"].to(self.dtype)
@@ -688,4 +587,3 @@ class ZSLClassifier(LightningModule):
         total_params = sum(p.numel() for p in self.parameters())
         params_per_layer += [("total", total_params)]
         return params_per_layer
-    
