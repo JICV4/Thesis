@@ -486,6 +486,14 @@ class ZSLClassifier(LightningModule):
         accu = self.accuracy2(logits, batch["strain"]) #Added
         #Consider a log for the accu
 
+        self.log( #added
+            "train_acc",
+            self.accuracy2,
+            on_step=False,
+            on_epoch=True,
+            batch_size=len(batch["strain"]),
+        )
+
         self.train_loss.append(loss) #self.train_loss.extend(loss) #Added
         self.train_accu.append(accu) #self.train_accu.extend(self.accuracy2) #Added 
 
