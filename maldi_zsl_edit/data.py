@@ -29,6 +29,10 @@ class MALDITOF_ZSL_Dataset(h5torch.Dataset):
         #   print("\n create index val\n") 
             self.indices_in_val = np.unique(self.f["central"][:][np.char.startswith(self.f[self.split][:].astype(str), 'val')].argmax(1))
             #self.indices_in_val = np.unique(self.f["central"][:][self.f[self.split][:].astype(str) == "val"].argmax(1))
+            #self.indices_in_val = np.unique(self.f["central"][:][np.char.startswith(self.f[self.split][:].astype(str), 'val') | self.f[self.split][:].astype(str) == "train"].argmax(1))
+            condition_val = np.char.startswith(self.f[self.split][:].astype(str), 'val')
+            condition_train = self.f[self.split][:].astype(str) == 'train'
+            self.indices_in_val = np.unique(self.f["central"][:][condition_val | condition_train].argmax(1))
             self.val_index_mapper = {v : k for k, v in enumerate(self.indices_in_val)}
 
     def sample_processor(self, f, sample):
