@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 class MALDITOF_ZSL_Dataset(h5torch.Dataset):
-    def __init__(self, file, split_index = 0, in_memory = True, return_all_seqs = True, frac = "train", **kwargs): #the frac arg is redefined when the data set is constructed bellow
+    def __init__(self, file, split_index = 0, in_memory = True, return_all_seqs = True, frac = "train", general=True, **kwargs): #the frac arg is redefined when the data set is constructed bellow
         super().__init__(
             file,
             in_memory=in_memory,
@@ -19,6 +19,7 @@ class MALDITOF_ZSL_Dataset(h5torch.Dataset):
 
         self.return_all = return_all_seqs
         self.split = "0/split_%s" % split_index
+        self.general = general
 
         self.frac = frac #Added fot ZSL seq
         if self.frac == "train": #Added for ZSL seq, consider one for the val
@@ -31,7 +32,8 @@ class MALDITOF_ZSL_Dataset(h5torch.Dataset):
             #self.indices_in_val = np.unique(self.f["central"][:][self.f[self.split][:].astype(str) == "val"].argmax(1))
             #self.indices_in_val = np.unique(self.f["central"][:][np.char.startswith(self.f[self.split][:].astype(str), 'val') | self.f[self.split][:].astype(str) == "train"].argmax(1))
             condition_val = np.char.startswith(self.f[self.split][:].astype(str), 'val')
-            condition_train = self.f[self.split][:].astype(str) == 'train'
+            if self.general: condition_train = self.f[self.split][:].astype(str) == 'train'
+            else: condition_train = False
             self.indices_in_val = np.unique(self.f["central"][:][condition_val | condition_train].argmax(1))
             self.val_index_mapper = {v : k for k, v in enumerate(self.indices_in_val)}
 
@@ -77,7 +79,7 @@ class MALDITOF_ZSL_Dataset(h5torch.Dataset):
         return batch_collated
     
 class MALDITOF_MC_Dataset(h5torch.Dataset):
-    def __init__(self, file, split_index = 0, in_memory = True, frac = "train", strain_to_spec_mapping = dict(), **kwargs,):
+    def __init__(self, file, split_index = 0, in_memory = True, frac = "train", strain_to_spec_mapping = dict(), general = None, **kwargs,):
         super().__init__(
             file,
             in_memory=in_memory,
@@ -115,6 +117,7 @@ class MALDITOFDataModule(LightningDataModule):
         split_index = 0,
         return_all_seqs = True,
         zsl_mode = True,
+        general = True,
     ):
         super().__init__()
         self.path = path
@@ -124,6 +127,7 @@ class MALDITOFDataModule(LightningDataModule):
         self.split = split_index
         self.return_all_seqs = return_all_seqs
         self.zsl = zsl_mode
+        self.general = general
         self.dataset_type = (MALDITOF_ZSL_Dataset if zsl_mode else MALDITOF_MC_Dataset) #Here we decide if the class (and arguments) are for the ZSL or data type or not
 
     def setup(self, stage):
@@ -159,6 +163,7 @@ class MALDITOFDataModule(LightningDataModule):
             return_all_seqs = self.return_all_seqs,
             frac = "val" + ("" if self.zsl else "_strain"),
             strain_to_spec_mapping = (None if self.zsl else strain_to_spec),
+            general = self.general
         )
 
         self.test = self.dataset_type(
