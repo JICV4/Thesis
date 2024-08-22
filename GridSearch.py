@@ -1,8 +1,8 @@
 from lightning.pytorch import Trainer, seed_everything #https://lightning.ai/docs/pytorch/stable/common/trainer.html
 from lightning.pytorch.callbacks import ModelCheckpoint, EarlyStopping #3
 from lightning.pytorch.loggers import TensorBoardLogger #3
-from maldi_zsl_edit.data import MALDITOFDataModule #1
-from maldi_zsl_edit.models import ZSLClassifier #2
+from maldi_zsl.data import MALDITOFDataModule #1
+from maldi_zsl.models import ZSLClassifier #2
 import os
 import sys
 import random
@@ -12,7 +12,7 @@ from torch.cuda import is_available as torch_cuda_is_available
 from torch.cuda import manual_seed as torch_cuda_manual_seed
 from torch.cuda import manual_seed_all as torch_cuda_manual_seed_all
 from datetime import datetime
-from maldi_zsl_edit.utils import ZSL_levels_metrics
+from maldi_zsl.utils import ZSL_levels_metrics
 
 def set_seed(seed):
     seed_everything(seed, workers=True)
@@ -177,5 +177,5 @@ if __name__ == "__main__":
         "pool": ["max","mean"],
     }
 
-    data_path = "../Data/final/zsl_mafft.h5t"
+    data_path = "../Data/final/zsl_SINAwasabi.h5t"# "../Data/final/zsl_mafft.h5t"
     grid_search (config,os.path.join(sys.path[0],data_path))
