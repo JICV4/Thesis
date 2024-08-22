@@ -1,0 +1,9 @@
+Working with /home/jorge/thesis/Thesis/../Data/final/zsl_mafft.h5t
+The search space is:
+{'emb_dim': [524, 1024], 'lr': [0.0001, 0.001], 'cnn_base': [[32, 64], [64, 128]], 'kernel': [5, 7], 'cnn_hid': [[0], [64]], 'pool': ['max', 'mean']}
+
+
+
+---model_41---
+
+Configuration: mean, 524, 0.001, [32, 64], 5, [64]

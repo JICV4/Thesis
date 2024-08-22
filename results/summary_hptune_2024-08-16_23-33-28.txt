@@ -1,0 +1,21 @@
+
+\begin{table}
+\caption{Results of the hyperparameter tunning considering the general accuracy.}
+\centering
+\small
+\begin{tabular}{l c c c c c c}
+\toprule
+\multicolumn{6}{c}{Parameter} & \multicolumn{1}{c}{Result} \ \cmidrule(lr){1-6} \cmidrule(lr){7-7}
+pool & emb\_dim & lr & cnn\_base & kernel & cnn\_hid & Accuracy\
+\midrule
+max & 1024 & 0.001 & [64, 128] & 7 & [64] & 0.0015 \\
+mean & 524 & 0.0001 & [32, 64] & 5 & [0] & 0.1451 \\
+mean & 524 & 0.0001 & [32, 64] & 5 & [64] & 0.0007 \\
+mean & 524 & 0.0001 & [32, 64] & 7 & [0] & 0.1574 \\
+mean & 524 & 0.0001 & [32, 64] & 7 & [64] & 0.0003 \\
+mean & 524 & 0.0001 & [64, 128] & 5 & [0] & 0.164 \\
+mean & 524 & 0.0001 & [64, 128] & 5 & [64] & 0.0001 \\
+mean & 524 & 0.0001 & [64, 128] & 7 & [0] & 0.1579 \\
+mean & 524 & 0.0001 & [64, 128] & 7 & [64] & 0.0019 \\
+mean & 524 & 0.001 & [32, 64] & 5 & [0] & 0.0006 \\
+mean & 524 & 0.001 & [32, 64] & 5 & [64] & 0.0161 \\

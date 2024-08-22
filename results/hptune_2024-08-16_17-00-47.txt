@@ -1,0 +1,1641 @@
+Working with /home/jorge/thesis/Thesis/../Data/final/zsl_mafft.h5t
+The search space is:
+{'emb_dim': [524, 1024], 'lr': [0.0001, 0.001], 'cnn_base': [[32, 64], [64, 128]], 'kernel': [5, 7], 'cnn_hid': [[0], [64]], 'pool': ['max', 'mean']}
+
+
+
+---model_15---
+
+Configuration: max, 524, 0.001, [64, 128], 7, [64]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.05177801102399826
+For the level Genus the accu score is: 0.04151168093085289
+For the level Species the accu score is: 0.0020830233115702868
+For the level Strain the accu score is: 0.0020830233115702868
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.00804570410400629
+For the level Genus the F1 score is: 0.004007972776889801
+For the level Species the F1 score is: 0.00019870829419232905
+For the level Strain the F1 score is: 0.0001800905738491565
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.04757250100374222
+For the level Genus the accu score is: 0.03714565187692642
+For the level Species the accu score is: 0.0032583903521299362
+For the level Strain the accu score is: 0.0032583903521299362
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01521546021103859
+For the level Genus the F1 score is: 0.009687741287052631
+For the level Species the F1 score is: 0.0008835088228806853
+For the level Strain the F1 score is: 0.0008599485736340284
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.05467068403959274
+For the level Genus the accu score is: 0.04821351543068886
+For the level Species the accu score is: 0.0017219113651663065
+For the level Strain the accu score is: 0.0017219113651663065
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.021664490923285484
+For the level Genus the F1 score is: 0.012259709648787975
+For the level Species the F1 score is: 0.0005555941606871784
+For the level Strain the F1 score is: 0.0005555941606871784
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0692167580127716
+For the level Genus the accu score is: 0.05282331630587578
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.03700239211320877
+For the level Genus the F1 score is: 0.0240800678730011
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.05234808847308159
+For the level Genus the accu score is: 0.042922068387269974
+For the level Species the accu score is: 0.0023565057199448347
+For the level Strain the accu score is: 0.0023565057199448347
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01451842486858368
+For the level Genus the F1 score is: 0.008555789478123188
+For the level Species the F1 score is: 0.0004993529291823506
+For the level Strain the F1 score is: 0.00047196229570545256
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.04743589833378792
+For the level Genus the accu score is: 0.03076923079788685
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.007510736584663391
+For the level Genus the F1 score is: 0.003427262883633375
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Summary validation ---
+Unseen acc: 0.0023565057199448347, Seen acc: 0.0, Harmonic mean: 0
+The best model is model_15, acc:0.0020830233115702868
+Configuration: max, 524, 0.001, [64, 128], 7, [64]
+
+
+
+---model_16---
+
+Configuration: max, 1024, 0.0001, [32, 64], 5, [0]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.10058026760816574
+For the level Genus the accu score is: 0.054604969918727875
+For the level Species the accu score is: 0.0010415116557851434
+For the level Strain the accu score is: 0.0007439369219355285
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.016024598851799965
+For the level Genus the F1 score is: 0.006559496745467186
+For the level Species the F1 score is: 0.000470891100121662
+For the level Strain the F1 score is: 0.0003062694740947336
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.11078527569770813
+For the level Genus the accu score is: 0.05962854251265526
+For the level Species the accu score is: 0.0013033561408519745
+For the level Strain the accu score is: 0.0009775171056389809
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.02280101552605629
+For the level Genus the F1 score is: 0.01072736456990242
+For the level Species the F1 score is: 0.000731016683857888
+For the level Strain the F1 score is: 0.0005020500393584371
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09556607902050018
+For the level Genus the accu score is: 0.0589754618704319
+For the level Species the accu score is: 0.0004304778412915766
+For the level Strain the accu score is: 0.0004304778412915766
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.02444811910390854
+For the level Genus the F1 score is: 0.011991789564490318
+For the level Species the F1 score is: 6.452445813920349e-05
+For the level Strain the F1 score is: 6.012506491970271e-05
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08014571666717529
+For the level Genus the accu score is: 0.01092896144837141
+For the level Species the accu score is: 0.0018214936135336757
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.009973803535103798
+For the level Genus the F1 score is: 0.003955500200390816
+For the level Species the F1 score is: 0.00044247787445783615
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.10200303047895432
+For the level Genus the accu score is: 0.054872918874025345
+For the level Species the accu score is: 0.0010099309729412198
+For the level Strain the accu score is: 0.0006732873152941465
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01970369555056095
+For the level Genus the F1 score is: 0.009022274054586887
+For the level Species the F1 score is: 0.0006722311954945326
+For the level Strain the F1 score is: 0.0004206009325571358
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08974359184503555
+For the level Genus the accu score is: 0.0525641031563282
+For the level Species the accu score is: 0.0012820513220503926
+For the level Strain the accu score is: 0.0012820513220503926
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.016430480405688286
+For the level Genus the F1 score is: 0.0068151638843119144
+For the level Species the F1 score is: 0.00018315018678549677
+For the level Strain the F1 score is: 0.0001740341103868559
+
+--- Summary validation ---
+Unseen acc: 0.0006732873152941465, Seen acc: 0.0012820513220503926, Harmonic mean: 0.0008829047574745207
+The best model is model_15, acc:0.0020830233115702868
+Configuration: max, 524, 0.001, [64, 128], 7, [64]
+
+
+
+---model_17---
+
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07201309502124786
+For the level Genus the accu score is: 0.03109656274318695
+For the level Species the accu score is: 0.009224818088114262
+For the level Strain the accu score is: 0.009224818088114262
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.008939385414123535
+For the level Genus the F1 score is: 0.004244803451001644
+For the level Species the F1 score is: 0.0007392528932541609
+For the level Strain the F1 score is: 0.0007293980452232063
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0446399487555027
+For the level Genus the accu score is: 0.01889866404235363
+For the level Species the accu score is: 0.013033561408519745
+For the level Strain the accu score is: 0.013033561408519745
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.009267095476388931
+For the level Genus the F1 score is: 0.005620285402983427
+For the level Species the F1 score is: 0.0018811456393450499
+For the level Strain the F1 score is: 0.0018840758129954338
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09126129746437073
+For the level Genus the accu score is: 0.049504950642585754
+For the level Species the accu score is: 0.00947051215916872
+For the level Strain the accu score is: 0.00947051215916872
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.017427809536457062
+For the level Genus the F1 score is: 0.008609178476035595
+For the level Species the F1 score is: 0.0010959503706544638
+For the level Strain the F1 score is: 0.0010206920560449362
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.14754098653793335
+For the level Genus the accu score is: 0.04189435392618179
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.016871286556124687
+For the level Genus the F1 score is: 0.008802421391010284
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07237838953733444
+For the level Genus the accu score is: 0.03299107775092125
+For the level Species the accu score is: 0.010435953736305237
+For the level Strain the accu score is: 0.010435953736305237
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01077212393283844
+For the level Genus the F1 score is: 0.005918855778872967
+For the level Species the F1 score is: 0.0012463330058380961
+For the level Strain the F1 score is: 0.0012138215824961662
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.06923077255487442
+For the level Genus the accu score is: 0.01666666753590107
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.009007257409393787
+For the level Genus the F1 score is: 0.0021502901799976826
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Summary validation ---
+Unseen acc: 0.010435953736305237, Seen acc: 0.0, Harmonic mean: 0
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_18---
+
+Configuration: max, 1024, 0.0001, [32, 64], 7, [0]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08332093805074692
+For the level Genus the accu score is: 0.042255617678165436
+For the level Species the accu score is: 0.0023805981036275625
+For the level Strain the accu score is: 0.0020830233115702868
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.015747861936688423
+For the level Genus the F1 score is: 0.006865336559712887
+For the level Species the F1 score is: 0.0005919417017139494
+For the level Strain the F1 score is: 0.0004899947671219707
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09058324992656708
+For the level Genus the accu score is: 0.04235907644033432
+For the level Species the accu score is: 0.0029325513169169426
+For the level Strain the accu score is: 0.0029325513169169426
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.024988297373056412
+For the level Genus the F1 score is: 0.009274560026824474
+For the level Species the F1 score is: 0.0008059112587943673
+For the level Strain the F1 score is: 0.0007505048997700214
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07705552875995636
+For the level Genus the accu score is: 0.05122686177492142
+For the level Species the accu score is: 0.0017219113651663065
+For the level Strain the accu score is: 0.001291433465667069
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.026096342131495476
+For the level Genus the F1 score is: 0.012383813038468361
+For the level Species the F1 score is: 0.0005639811861328781
+For the level Strain the F1 score is: 0.0004379561869427562
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.10018214583396912
+For the level Genus the accu score is: 0.025500910356640816
+For the level Species the accu score is: 0.0036429872270673513
+For the level Strain the accu score is: 0.0036429872270673513
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.014319652691483498
+For the level Genus the F1 score is: 0.005433191079646349
+For the level Species the F1 score is: 0.0004637681122403592
+For the level Strain the F1 score is: 0.0004425268271006644
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08618077635765076
+For the level Genus the accu score is: 0.044268641620874405
+For the level Species the accu score is: 0.0025248273741453886
+For the level Strain the accu score is: 0.0023565057199448347
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.021145278587937355
+For the level Genus the F1 score is: 0.009563014842569828
+For the level Species the F1 score is: 0.0008354013552889228
+For the level Strain the F1 score is: 0.0007463520159944892
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0615384615957737
+For the level Genus the accu score is: 0.026923077180981636
+For the level Species the accu score is: 0.0012820513220503926
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.011997807770967484
+For the level Genus the F1 score is: 0.0063016461208462715
+For the level Species the F1 score is: 0.0006053269025869668
+For the level Strain the F1 score is: 0.0
+
+--- Summary validation ---
+Unseen acc: 0.0023565057199448347, Seen acc: 0.0, Harmonic mean: 0
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_19---
+
+Configuration: max, 1024, 0.0001, [32, 64], 7, [64]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07841095328330994
+For the level Genus the accu score is: 0.050885286182165146
+For the level Species the accu score is: 0.0008927243179641664
+For the level Strain the accu score is: 0.0008927243179641664
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01176772452890873
+For the level Genus the F1 score is: 0.006403216160833836
+For the level Species the F1 score is: 0.00017819655477069318
+For the level Strain the F1 score is: 0.00016047019744291902
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0768980160355568
+For the level Genus the accu score is: 0.041381556540727615
+For the level Species the accu score is: 0.0003258390352129936
+For the level Strain the accu score is: 0.0003258390352129936
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.017391309142112732
+For the level Genus the F1 score is: 0.00941899698227644
+For the level Species the F1 score is: 0.00017361111531499773
+For the level Strain the F1 score is: 0.00016404199413955212
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07619457691907883
+For the level Genus the accu score is: 0.06069737300276756
+For the level Species the accu score is: 0.001291433465667069
+For the level Strain the accu score is: 0.001291433465667069
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.019674204289913177
+For the level Genus the F1 score is: 0.014934887178242207
+For the level Species the F1 score is: 0.0004495541797950864
+For the level Strain the F1 score is: 0.00042727895197458565
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0765027329325676
+For the level Genus the accu score is: 0.04371584579348564
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.015551971271634102
+For the level Genus the F1 score is: 0.010055703110992908
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07658643275499344
+For the level Genus the accu score is: 0.049149975180625916
+For the level Species the accu score is: 0.0006732873152941465
+For the level Strain the accu score is: 0.0006732873152941465
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.016272934153676033
+For the level Genus the F1 score is: 0.009578641504049301
+For the level Species the F1 score is: 0.0002846398565452546
+For the level Strain the F1 score is: 0.00025945049128495157
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0923076942563057
+For the level Genus the accu score is: 0.06410256773233414
+For the level Species the accu score is: 0.0025641026441007853
+For the level Strain the accu score is: 0.0025641026441007853
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.014826847240328789
+For the level Genus the F1 score is: 0.0074151661247015
+For the level Species the F1 score is: 0.0001603270648047328
+For the level Strain the F1 score is: 0.00015249713032972068
+
+--- Summary validation ---
+Unseen acc: 0.0006732873152941465, Seen acc: 0.0025641026441007853, Harmonic mean: 0.0010665244576886872
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_20---
+
+Configuration: max, 1024, 0.0001, [64, 128], 5, [0]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09090909361839294
+For the level Genus the accu score is: 0.04463621601462364
+For the level Species the accu score is: 0.0013390864478424191
+For the level Strain the accu score is: 0.0010415116557851434
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.014655066654086113
+For the level Genus the F1 score is: 0.005165547132492065
+For the level Species the F1 score is: 0.0002731710847001523
+For the level Strain the F1 score is: 0.00021476464462466538
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08732486516237259
+For the level Genus the accu score is: 0.048550017178058624
+For the level Species the accu score is: 0.0013033561408519745
+For the level Strain the accu score is: 0.0006516780704259872
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.018247030675411224
+For the level Genus the F1 score is: 0.006958598271012306
+For the level Species the F1 score is: 0.0003320875111967325
+For the level Strain the F1 score is: 0.00013979659706819803
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08179078996181488
+For the level Genus the accu score is: 0.03616013750433922
+For the level Species the accu score is: 0.001291433465667069
+For the level Strain the accu score is: 0.001291433465667069
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01653982698917389
+For the level Genus the F1 score is: 0.0058446661569178104
+For the level Species the F1 score is: 0.0002944594598375261
+For the level Strain the F1 score is: 0.0002788316924124956
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.1493624746799469
+For the level Genus the accu score is: 0.047358833253383636
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.016259154304862022
+For the level Genus the F1 score is: 0.00600125826895237
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09089379012584686
+For the level Genus the accu score is: 0.04359535500407219
+For the level Species the accu score is: 0.0011782528599724174
+For the level Strain the accu score is: 0.0008416091441176832
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.016508430242538452
+For the level Genus the F1 score is: 0.005767942406237125
+For the level Species the F1 score is: 0.00029935193015262485
+For the level Strain the F1 score is: 0.0002325498207937926
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09102564305067062
+For the level Genus the accu score is: 0.0525641031563282
+For the level Species the accu score is: 0.0025641026441007853
+For the level Strain the accu score is: 0.0025641026441007853
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.014017530716955662
+For the level Genus the F1 score is: 0.006028678268194199
+For the level Species the F1 score is: 0.00034090911503881216
+For the level Strain the F1 score is: 0.000316455727443099
+
+--- Summary validation ---
+Unseen acc: 0.0008416091441176832, Seen acc: 0.0025641026441007853, Harmonic mean: 0.0012672665016439269
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_21---
+
+Configuration: max, 1024, 0.0001, [64, 128], 5, [64]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08034518361091614
+For the level Genus the accu score is: 0.06293706595897675
+For the level Species the accu score is: 0.0023805981036275625
+For the level Strain the accu score is: 0.0023805981036275625
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.014379660598933697
+For the level Genus the F1 score is: 0.00703812763094902
+For the level Species the F1 score is: 0.00011849745351355523
+For the level Strain the F1 score is: 0.00010701672727009282
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08276311308145523
+For the level Genus the accu score is: 0.07103291153907776
+For the level Species the accu score is: 0.004887585528194904
+For the level Strain the accu score is: 0.004887585528194904
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.021173719316720963
+For the level Genus the F1 score is: 0.01285545900464058
+For the level Species the F1 score is: 0.00043569819536060095
+For the level Strain the F1 score is: 0.0004162157420068979
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.06973741203546524
+For the level Genus the accu score is: 0.04735255986452103
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.022821318358182907
+For the level Genus the F1 score is: 0.011900095269083977
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.05100182071328163
+For the level Genus the accu score is: 0.04189435392618179
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01204629335552454
+For the level Genus the F1 score is: 0.008953647688031197
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0747348964214325
+For the level Genus the accu score is: 0.05908096209168434
+For the level Species the accu score is: 0.0025248273741453886
+For the level Strain the accu score is: 0.0025248273741453886
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.018619870766997337
+For the level Genus the F1 score is: 0.010657703503966331
+For the level Species the F1 score is: 0.0001923940289998427
+For the level Strain the F1 score is: 0.00017593553639017045
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.1230769231915474
+For the level Genus the accu score is: 0.0923076942563057
+For the level Species the accu score is: 0.0012820513220503926
+For the level Strain the accu score is: 0.0012820513220503926
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.019921470433473587
+For the level Genus the F1 score is: 0.009938140399754047
+For the level Species the F1 score is: 0.00019801979942712933
+For the level Strain the F1 score is: 0.00018912529048975557
+
+--- Summary validation ---
+Unseen acc: 0.0025248273741453886, Seen acc: 0.0012820513220503926, Harmonic mean: 0.001700583880545925
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_22---
+
+Configuration: max, 1024, 0.0001, [64, 128], 7, [0]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.06963249295949936
+For the level Genus the accu score is: 0.04344591498374939
+For the level Species the accu score is: 0.002826960291713476
+For the level Strain the accu score is: 0.0011902990518137813
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.011895863339304924
+For the level Genus the F1 score is: 0.005130113568156958
+For the level Species the F1 score is: 0.0010464160004630685
+For the level Strain the F1 score is: 0.0006093870615586638
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.05669599398970604
+For the level Genus the accu score is: 0.04072988033294678
+For the level Species the accu score is: 0.0022808732464909554
+For the level Strain the accu score is: 0.0013033561408519745
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.013555919751524925
+For the level Genus the F1 score is: 0.005971821490675211
+For the level Species the F1 score is: 0.0008278155000880361
+For the level Strain the F1 score is: 0.0005701876943930984
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07748600840568542
+For the level Genus the accu score is: 0.04735255986452103
+For the level Species the accu score is: 0.0038743005134165287
+For the level Strain the accu score is: 0.0004304778412915766
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.0166651401668787
+For the level Genus the F1 score is: 0.00728616351261735
+For the level Species the F1 score is: 0.0009811146883293986
+For the level Strain the F1 score is: 0.0001740341103868559
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.11293260753154755
+For the level Genus the accu score is: 0.04918032884597778
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.014558771625161171
+For the level Genus the F1 score is: 0.007904492318630219
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07002188265323639
+For the level Genus the accu score is: 0.0441003181040287
+For the level Species the accu score is: 0.002693149261176586
+For the level Strain the accu score is: 0.0008416091441176832
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.013725029304623604
+For the level Genus the F1 score is: 0.0062898448668420315
+For the level Species the F1 score is: 0.0011408306891098619
+For the level Strain the F1 score is: 0.000545760674867779
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.06666667014360428
+For the level Genus the accu score is: 0.03846153989434242
+For the level Species the accu score is: 0.003846153849735856
+For the level Strain the accu score is: 0.003846153849735856
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.013781655579805374
+For the level Genus the F1 score is: 0.005612035747617483
+For the level Species the F1 score is: 0.0018018721602857113
+For the level Strain the F1 score is: 0.0017039442900568247
+
+--- Summary validation ---
+Unseen acc: 0.0008416091441176832, Seen acc: 0.003846153849735856, Harmonic mean: 0.001381024703623171
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_23---
+
+Configuration: max, 1024, 0.0001, [64, 128], 7, [64]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08867727965116501
+For the level Genus the accu score is: 0.06531766057014465
+For the level Species the accu score is: 0.007439369335770607
+For the level Strain the accu score is: 0.0017854486359283328
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.012536698020994663
+For the level Genus the F1 score is: 0.007122371811419725
+For the level Species the F1 score is: 0.0009087158250622451
+For the level Strain the F1 score is: 0.0004639681428670883
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07820136845111847
+For the level Genus the accu score is: 0.06484197080135345
+For the level Species the accu score is: 0.012707722373306751
+For the level Strain the accu score is: 0.0006516780704259872
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.018250415101647377
+For the level Genus the F1 score is: 0.013225868344306946
+For the level Species the F1 score is: 0.0016884473152458668
+For the level Strain the F1 score is: 0.0002817298227455467
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09814894199371338
+For the level Genus the accu score is: 0.07834696769714355
+For the level Species the accu score is: 0.0030133447144180536
+For the level Strain the accu score is: 0.002582866931334138
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.027870625257492065
+For the level Genus the F1 score is: 0.014745673164725304
+For the level Species the F1 score is: 0.0015069561777636409
+For the level Strain the F1 score is: 0.0013368634972721338
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09653916209936142
+For the level Genus the accu score is: 0.030965391546487808
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01371791958808899
+For the level Genus the F1 score is: 0.008187058381736279
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08769567310810089
+For the level Genus the accu score is: 0.06699208915233612
+For the level Species the accu score is: 0.007742804009467363
+For the level Strain the accu score is: 0.001346574630588293
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.017672346904873848
+For the level Genus the F1 score is: 0.011309688910841942
+For the level Species the F1 score is: 0.0016958374762907624
+For the level Strain the F1 score is: 0.000834332371596247
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09615384787321091
+For the level Genus the accu score is: 0.0525641031563282
+For the level Species the accu score is: 0.0051282052882015705
+For the level Strain the accu score is: 0.0051282052882015705
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.015515206381678581
+For the level Genus the F1 score is: 0.006581217050552368
+For the level Species the F1 score is: 0.00023412350856233388
+For the level Strain the F1 score is: 0.00022462445485871285
+
+--- Summary validation ---
+Unseen acc: 0.001346574630588293, Seen acc: 0.0051282052882015705, Harmonic mean: 0.0021330489153773744
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_24---
+
+Configuration: max, 1024, 0.001, [32, 64], 5, [0]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07632792741060257
+For the level Genus the accu score is: 0.05668799206614494
+For the level Species the accu score is: 0.00014878738147672266
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.011405454017221928
+For the level Genus the F1 score is: 0.00532612856477499
+For the level Species the F1 score is: 1.5170133337960579e-05
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07461713999509811
+For the level Genus the accu score is: 0.05897686630487442
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.018776997923851013
+For the level Genus the F1 score is: 0.009833707474172115
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07447266578674316
+For the level Genus the accu score is: 0.056392595171928406
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.023208914324641228
+For the level Genus the F1 score is: 0.011440613307058811
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.1147540956735611
+For the level Genus the accu score is: 0.0692167580127716
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.032641537487506866
+For the level Genus the F1 score is: 0.020146042108535767
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07826965302228928
+For the level Genus the accu score is: 0.05891264230012894
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.018207401037216187
+For the level Genus the F1 score is: 0.009250335395336151
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0615384615957737
+For the level Genus the accu score is: 0.03974359109997749
+For the level Species the accu score is: 0.0012820513220503926
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.010224391706287861
+For the level Genus the F1 score is: 0.004757973365485668
+For the level Species the F1 score is: 0.0001315789413638413
+For the level Strain the F1 score is: 0.0
+
+--- Summary validation ---
+Unseen acc: 0.0, Seen acc: 0.0, Harmonic mean: 0
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_25---
+
+Configuration: max, 1024, 0.001, [32, 64], 5, [64]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08808212727308273
+For the level Genus the accu score is: 0.05564648285508156
+For the level Species the accu score is: 0.0008927243179641664
+For the level Strain the accu score is: 0.0008927243179641664
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.011741813272237778
+For the level Genus the F1 score is: 0.005051284562796354
+For the level Species the F1 score is: 9.874917304841802e-05
+For the level Strain the F1 score is: 9.179014159599319e-05
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.08895405381917953
+For the level Genus the accu score is: 0.06907787919044495
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.0245006512850523
+For the level Genus the F1 score is: 0.017566006630659103
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07619457691907883
+For the level Genus the accu score is: 0.0439087375998497
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.02589244581758976
+For the level Genus the F1 score is: 0.01114472933113575
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.1803278625011444
+For the level Genus the accu score is: 0.061930783092975616
+For the level Species the accu score is: 0.01092896144837141
+For the level Strain the accu score is: 0.01092896144837141
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.06580476462841034
+For the level Genus the F1 score is: 0.03496422991156578
+For the level Species the F1 score is: 0.003076923079788685
+For the level Strain the F1 score is: 0.003016591304913163
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.092408686876297
+For the level Genus the accu score is: 0.05857599899172783
+For the level Species the accu score is: 0.0010099309729412198
+For the level Strain the accu score is: 0.0010099309729412198
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.02159726433455944
+For the level Genus the F1 score is: 0.011550572700798512
+For the level Species the F1 score is: 0.00028991809813305736
+For the level Strain the F1 score is: 0.0002739726041909307
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.05512820556759834
+For the level Genus the accu score is: 0.03333333507180214
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.00715503329411149
+For the level Genus the F1 score is: 0.0030483792070299387
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Summary validation ---
+Unseen acc: 0.0010099309729412198, Seen acc: 0.0, Harmonic mean: 0
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_26---
+
+Configuration: max, 1024, 0.001, [32, 64], 7, [0]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.04047016799449921
+For the level Genus the accu score is: 0.01577146165072918
+For the level Species the accu score is: 0.0011902990518137813
+For the level Strain the accu score is: 0.0004463621589820832
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.005429708398878574
+For the level Genus the F1 score is: 0.0028270292095839977
+For the level Species the F1 score is: 0.0002046738809440285
+For the level Strain the F1 score is: 0.00013556545309256762
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.027696318924427032
+For the level Genus the accu score is: 0.014011078514158726
+For the level Species the accu score is: 0.0003258390352129936
+For the level Strain the accu score is: 0.0003258390352129936
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.007120263297110796
+For the level Genus the F1 score is: 0.0053781308233737946
+For the level Species the F1 score is: 0.00023623908055014908
+For the level Strain the F1 score is: 0.00022537751647178084
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.043478261679410934
+For the level Genus the accu score is: 0.01808006875216961
+For the level Species the accu score is: 0.002152389148250222
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.010809192433953285
+For the level Genus the F1 score is: 0.006256552878767252
+For the level Species the F1 score is: 0.0005108556943014264
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.10928961634635925
+For the level Genus the accu score is: 0.025500910356640816
+For the level Species the accu score is: 0.0018214936135336757
+For the level Strain the accu score is: 0.0018214936135336757
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.013477089814841747
+For the level Genus the F1 score is: 0.008641053922474384
+For the level Species the F1 score is: 0.0005561735015362501
+For the level Strain the F1 score is: 0.0005473453784361482
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.04140717163681984
+For the level Genus the accu score is: 0.01666386052966118
+For the level Species the accu score is: 0.0011782528599724174
+For the level Strain the accu score is: 0.00033664365764707327
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.007255872245877981
+For the level Genus the F1 score is: 0.004778378177434206
+For the level Species the F1 score is: 0.0004076897166669369
+For the level Strain the F1 score is: 0.0002451202308293432
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.03333333507180214
+For the level Genus the accu score is: 0.00897435937076807
+For the level Species the accu score is: 0.0012820513220503926
+For the level Strain the accu score is: 0.0012820513220503926
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.006690892856568098
+For the level Genus the F1 score is: 0.002354048890992999
+For the level Species the F1 score is: 0.0003196930920239538
+For the level Strain the F1 score is: 0.0003094059356953949
+
+--- Summary validation ---
+Unseen acc: 0.00033664365764707327, Seen acc: 0.0012820513220503926, Harmonic mean: 0.0005332622288443436
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_27---
+
+Configuration: max, 1024, 0.001, [32, 64], 7, [64]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.03094777651131153
+For the level Genus the accu score is: 0.02618657983839512
+For the level Species the accu score is: 0.0007439369219355285
+For the level Strain the accu score is: 0.0007439369219355285
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.004337849095463753
+For the level Genus the F1 score is: 0.0021038425620645285
+For the level Species the F1 score is: 0.0001469645940233022
+For the level Strain the F1 score is: 0.000132691056933254
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.03356141969561577
+For the level Genus the accu score is: 0.029651353135704994
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.008253385312855244
+For the level Genus the F1 score is: 0.00431118905544281
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.029272492974996567
+For the level Genus the accu score is: 0.025398191064596176
+For the level Species the accu score is: 0.001291433465667069
+For the level Strain the accu score is: 0.001291433465667069
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.011458385735750198
+For the level Genus the F1 score is: 0.00798688642680645
+For the level Species the F1 score is: 0.0010084033710882068
+For the level Strain the F1 score is: 0.0009756097570061684
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.018214935436844826
+For the level Genus the accu score is: 0.007285974454134703
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.007463447749614716
+For the level Genus the F1 score is: 0.0023655209224671125
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.030466251075267792
+For the level Genus the accu score is: 0.025921562686562538
+For the level Species the accu score is: 0.0005049654864706099
+For the level Strain the accu score is: 0.0005049654864706099
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.008044146932661533
+For the level Genus the F1 score is: 0.004510965663939714
+For the level Species the F1 score is: 0.00036690515116788447
+For the level Strain the F1 score is: 0.0003390596539247781
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.03461538627743721
+For the level Genus the accu score is: 0.028205128386616707
+For the level Species the accu score is: 0.0025641026441007853
+For the level Strain the accu score is: 0.0025641026441007853
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.004752626176923513
+For the level Genus the F1 score is: 0.003051607869565487
+For the level Species the F1 score is: 0.00010883168579312041
+For the level Strain the F1 score is: 0.00010532968008192256
+
+--- Summary validation ---
+Unseen acc: 0.0005049654864706099, Seen acc: 0.0025641026441007853, Harmonic mean: 0.0008437631775856791
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_28---
+
+Configuration: max, 1024, 0.001, [64, 128], 5, [0]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.06695432215929031
+For the level Genus the accu score is: 0.06516887247562408
+For the level Species the accu score is: 0.0068442197516560555
+For the level Strain the accu score is: 0.0005951495259068906
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.001932453946210444
+For the level Genus the F1 score is: 0.0009524119668640196
+For the level Species the F1 score is: 0.00010373128316132352
+For the level Strain the F1 score is: 8.98892631084891e-06
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.05702183023095131
+For the level Genus the accu score is: 0.05669599398970604
+For the level Species the accu score is: 0.013685239478945732
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.003489227034151554
+For the level Genus the F1 score is: 0.0023949623573571444
+For the level Species the F1 score is: 0.001057361951097846
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.10073181241750717
+For the level Genus the accu score is: 0.1003013327717781
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.008941884152591228
+For the level Genus the F1 score is: 0.004946816712617874
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.005464480724185705
+For the level Genus the accu score is: 0.0
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.003246753243729472
+For the level Genus the F1 score is: 0.0
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.06934859603643417
+For the level Genus the accu score is: 0.06850698590278625
+For the level Species the accu score is: 0.0070695169270038605
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.00402685534209013
+For the level Genus the F1 score is: 0.0022995907347649336
+For the level Species the F1 score is: 0.00031614958425052464
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.04871794953942299
+For the level Genus the accu score is: 0.03974359109997749
+For the level Species the accu score is: 0.0051282052882015705
+For the level Strain the accu score is: 0.0051282052882015705
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.0016022827476263046
+For the level Genus the F1 score is: 0.0006664159009233117
+For the level Species the F1 score is: 0.00010311404912499711
+For the level Strain the F1 score is: 0.00010994296462740749
+
+--- Summary validation ---
+Unseen acc: 0.0, Seen acc: 0.0051282052882015705, Harmonic mean: 0
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_29---
+
+Configuration: max, 1024, 0.001, [64, 128], 5, [64]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.047909535467624664
+For the level Genus the accu score is: 0.01919357292354107
+For the level Species the accu score is: 0.001636661239899695
+For the level Strain the accu score is: 0.001487873843871057
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.008430030196905136
+For the level Genus the F1 score is: 0.0036984793841838837
+For the level Species the F1 score is: 0.0006561547634191811
+For the level Strain the F1 score is: 0.0005695784348063171
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.046269144862890244
+For the level Genus the accu score is: 0.01661779172718525
+For the level Species the accu score is: 0.0009775171056389809
+For the level Strain the accu score is: 0.0009775171056389809
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01374197006225586
+For the level Genus the F1 score is: 0.0060371411964297295
+For the level Species the F1 score is: 0.0006687456625513732
+For the level Strain the F1 score is: 0.0006220890209078789
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.044339217245578766
+For the level Genus the accu score is: 0.023676279932260513
+For the level Species the accu score is: 0.0030133447144180536
+For the level Strain the accu score is: 0.0030133447144180536
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.01523228082805872
+For the level Genus the F1 score is: 0.009524405933916569
+For the level Species the F1 score is: 0.0015926219057291746
+For the level Strain the F1 score is: 0.0014947513118386269
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.061930783092975616
+For the level Genus the accu score is: 0.009107467718422413
+For the level Species the accu score is: 0.0018214936135336757
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.007722385227680206
+For the level Genus the F1 score is: 0.0017221495509147644
+For the level Species the F1 score is: 0.00032010243739932775
+For the level Strain the F1 score is: 0.0
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.046961791813373566
+For the level Genus the accu score is: 0.018683724105358124
+For the level Species the accu score is: 0.001851540175266564
+For the level Strain the accu score is: 0.0016832182882353663
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.013096912764012814
+For the level Genus the F1 score is: 0.006724427454173565
+For the level Species the F1 score is: 0.0013620165409520268
+For the level Strain the F1 score is: 0.0011825216934084892
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.05512820556759834
+For the level Genus the accu score is: 0.023076923564076424
+For the level Species the accu score is: 0.0
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.009454872459173203
+For the level Genus the F1 score is: 0.0027580056339502335
+For the level Species the F1 score is: 0.0
+For the level Strain the F1 score is: 0.0
+
+--- Summary validation ---
+Unseen acc: 0.0016832182882353663, Seen acc: 0.0, Harmonic mean: 0
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_30---
+
+Configuration: max, 1024, 0.001, [64, 128], 7, [0]
+--- Getting predictions ---
+Working with validation set
+
+For Family there are 77 different labels
+For Genus there are 149 different labels
+For Species there are 563 different labels
+For Strain there are 623 different labels
+
+--- Multi level evaluation general ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07469126582145691
+For the level Genus the accu score is: 0.05073649808764458
+For the level Species the accu score is: 0.006100282538682222
+For the level Strain the accu score is: 0.005505132954567671
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.011282957158982754
+For the level Genus the F1 score is: 0.005285019055008888
+For the level Species the F1 score is: 0.0005315335583873093
+For the level Strain the F1 score is: 0.00039481770363636315
+
+--- Multi level evaluation val_geni ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.06190941855311394
+For the level Genus the accu score is: 0.04496578872203827
+For the level Species the accu score is: 0.0065167807042598724
+For the level Strain the accu score is: 0.0065167807042598724
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.019039200618863106
+For the level Genus the F1 score is: 0.009921487420797348
+For the level Species the F1 score is: 0.001304761739447713
+For the level Strain the F1 score is: 0.0012411148054525256
+
+--- Multi level evaluation val_spec ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.09341368824243546
+For the level Genus the accu score is: 0.06328023970127106
+For the level Species the accu score is: 0.006887645460665226
+For the level Strain the accu score is: 0.006887645460665226
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.03385144844651222
+For the level Genus the F1 score is: 0.0133526511490345
+For the level Species the F1 score is: 0.0020325202494859695
+For the level Strain the F1 score is: 0.001956109656020999
+
+--- Multi level evaluation val_strain ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.0728597417473793
+For the level Genus the accu score is: 0.04371584579348564
+For the level Species the accu score is: 0.0018214936135336757
+For the level Strain the accu score is: 0.0018214936135336757
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.012350967153906822
+For the level Genus the F1 score is: 0.01014865655452013
+For the level Species the F1 score is: 0.0011435105698183179
+For the level Strain the F1 score is: 0.0010822510812431574
+
+--- Multi level evaluation val_unseen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07523985952138901
+For the level Genus the accu score is: 0.05201144516468048
+For the level Species the accu score is: 0.006227907724678516
+For the level Strain the accu score is: 0.006227907724678516
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.019793614745140076
+For the level Genus the F1 score is: 0.009711340069770813
+For the level Species the F1 score is: 0.0011036077048629522
+For the level Strain the F1 score is: 0.001006230479106307
+
+--- Multi level evaluation val_seen ---
+
+--- Calculating Accuracy ---
+For the level Family the accu score is: 0.07051282376050949
+For the level Genus the accu score is: 0.041025642305612564
+For the level Species the accu score is: 0.0051282052882015705
+For the level Strain the accu score is: 0.0
+
+--- Calculating F1 scores ---
+For the level Family the F1 score is: 0.010781464166939259
+For the level Genus the F1 score is: 0.0054205418564379215
+For the level Species the F1 score is: 0.0016042499337345362
+For the level Strain the F1 score is: 0.0
+
+--- Summary validation ---
+Unseen acc: 0.006227907724678516, Seen acc: 0.0, Harmonic mean: 0
+The best model is model_17, acc:0.009224818088114262
+Configuration: max, 1024, 0.0001, [32, 64], 5, [64]
+
+
+
+---model_31---
+
+Configuration: max, 1024, 0.001, [64, 128], 7, [64]
