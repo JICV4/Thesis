@@ -391,8 +391,9 @@ class CNNEmbedding(nn.Module):
         #Also, the embedding dim shold be here as is the out of the lineal activation function
         blocks_per_stage = 0, #How many residual blocks are applied before the pooling
         kernel_size = 3,
-        hidden_sizes = [512, 256], #For an extra mlp at the end
+        hidden_sizes = [0], #For an extra mlp at the end
         dropout = 0.2,
+        mode = "max"
     ):
         super().__init__()
 
@@ -406,7 +407,7 @@ class CNNEmbedding(nn.Module):
             if hdim != conv_sizes[-1]: #After the residual blocks apply a regular convolution to reduce the dimension
                 layers.append(nn.Conv1d(hdim, conv_sizes[i+1], kernel_size = 2, stride = 1))
             else: #If ypu are on the last convolution apply a global pooling instead
-                layers.append(GlobalPool(pooled_axis = 2, mode = "max")) #Check if the dim is the right one, should be the lenght (consider shape)
+                layers.append(GlobalPool(pooled_axis = 2, mode = mode)) #Check if the dim is the right one, should be the lenght (consider shape)
         
         #Here start the loop of the MLP 
         if hidden_sizes == [0]: #Add the [0] as parameter instead of False
