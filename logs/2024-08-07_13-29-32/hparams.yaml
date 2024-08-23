@@ -1,0 +1,21 @@
+cnn_kwargs:
+  blocks_per_stage: 1
+  conv_sizes:
+  - 64
+  - 128
+  dropout: 0.2
+  emb_dim: 1024
+  hidden_sizes:
+  - 0
+  kernel_size: 7
+  mode: max
+embed_dim: 1024
+lr: 0.0001
+lr_decay_factor: 1.0
+mlp_kwargs:
+  emb_dim: 1024
+n_classes: 623
+nlp: true
+t_classes: 463
+warmup_steps: 250
+weight_decay: 0
