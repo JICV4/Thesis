@@ -77,6 +77,6 @@ batch
 
 ## TO-DO
 
-- [ ] Implement Zero shot learning model
-- [ ] Implement training script for ZSL model
-- [ ] Implement multi-level accuracy metrics (family-level, genus-level, species-level, strain-level)
+- [x] Implement Zero shot learning model
+- [x] Implement training script for ZSL model
+- [x] Implement multi-level accuracy metrics (family-level, genus-level, species-level, strain-level)
