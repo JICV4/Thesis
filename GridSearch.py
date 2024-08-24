@@ -97,7 +97,7 @@ pool & emb\_dim & lr & cnn\_base & kernel & cnn\_hid & Accuracy\\\\
                             
                                 val_ckpt = ModelCheckpoint(monitor="val_acc", mode="max")
                                 callbacks = [val_ckpt, EarlyStopping(monitor="val_acc", patience=20, mode="max")]
-                                logger = TensorBoardLogger(os.path.join(sys.path[0],"../logs_folder"), name=f"hptune_{strtime}", version=vmod)
+                                logger = TensorBoardLogger(os.path.join(sys.path[0],"logs"), name=f"hptune_{strtime}", version=vmod)
 
                                 trainer = Trainer(
                                     min_epochs= 80,
@@ -123,7 +123,7 @@ pool & emb\_dim & lr & cnn\_base & kernel & cnn\_hid & Accuracy\\\\
                                     print("Problem in the training, skipping")
                                     continue
                                 sys.stdout = f #now we can keep the records
-                                accug, f1g, gen, unacc, snacc, hmean, ev_species = ZSL_levels_metrics(data_path,model,levels,"Val",split_index=1,general=True)
+                                accug, f1g, gen, unacc, snacc, hmean, ev_species, labels = ZSL_levels_metrics(data_path,model,levels,"Val",split_index=1,general=True)
                                 row=f"""
 {pool} & {emb_dim} & {lr} & {cnn_base} & {kernel} & {cnn_hid} & {round(gen, 4)} \\\\"""
                                 with open(os.path.join(sys.path[0],f'results/summary_hptune_{strtime}.txt'), 'a') as file:
@@ -177,5 +177,5 @@ if __name__ == "__main__":
         "pool": ["max","mean"],
     }
 
-    data_path = "../Data/final/zsl_SINAwasabi.h5t"# "../Data/final/zsl_mafft.h5t"
+    data_path = "Data/zsl_SINAwasabi.h5t"# "../Data/final/zsl_mafft.h5t"
     grid_search (config,os.path.join(sys.path[0],data_path))
